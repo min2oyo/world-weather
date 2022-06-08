@@ -1,11 +1,12 @@
 import React from 'react';
 
-const WeatherBox = () => {
+const WeatherBox = ({ weather }) => {
+
   return (
     <div className='weather-box'>
-      <div>서울</div>
-      <h2>30도 / 섭씨 230화씨</h2>
-      <h3>맑은 하늘</h3>
+      <div>{weather?.name}</div>
+      <h2>{weather?.main.temp}C / {weather?.main.temp * 1.8 + 32}화씨</h2>
+      <h3>{weather?.weather[0].description}</h3>
     </div>
   );
 };
