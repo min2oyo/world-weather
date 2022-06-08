@@ -1,6 +1,7 @@
 # package
 
 npm install react-bootstrap bootstrap
+npm install --save react-spinners
 
 # Getting Started with Create React App
 

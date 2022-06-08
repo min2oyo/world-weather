@@ -2,7 +2,6 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 
 const WeatherButton = ({ cities, setCity }) => {
-  console.log(`cities`, cities);
   return (
     <div>
       <Button variant="warning">Current Location</Button>
