@@ -13,13 +13,15 @@ import WeatherButton from './component/WeatherButton';
 
 function App() {
 
-  const [weather, setWeather] = useState(null);
   const cities = [`paris`, `new york`, `tokyo`, `seoul`];
+  const [city, setCity] = useState(``);
+  const [weather, setWeather] = useState(null);
 
+  // loading
   useEffect(() => {
-    getCurrentLocation();
+    city === "" ? getCurrentLocation() : getWeatherByCity();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [city]);
 
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -30,17 +32,25 @@ function App() {
   };
 
   const getWeatherByCurrentLocation = async (lat, lon) => {
-    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${`93976fd635a5ca9cfda6c66184d6d3fe&units=metric`}`;
+    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=93976fd635a5ca9cfda6c66184d6d3fe&units=metric`;
     let response = await fetch(url);
     let data = await response.json();
     setWeather(data);
   };
 
+  const getWeatherByCity = async () => {
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=93976fd635a5ca9cfda6c66184d6d3fe&units=metric`;
+    let response = await fetch(url);
+    let data = await response.json();
+    setWeather(data);
+  };
+
+  // render
   return (
     <div>
       <div className='container'>
         <WeatherBox weather={weather} />
-        <WeatherButton cities={cities} />
+        <WeatherButton cities={cities} setCity={setCity} />
       </div>
     </div>
   );
