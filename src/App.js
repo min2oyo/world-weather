@@ -7,6 +7,9 @@
 
 import { useEffect } from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import WeatherBox from './component/WeatherBox';
+import WeatherButton from './component/WeatherButton';
 
 function App() {
 
@@ -23,16 +26,19 @@ function App() {
     let reponse = await fetch(url);
     let data = await reponse.json();
     console.log(`data`, data);
-
   };
 
   useEffect(() => {
     getCurrentLocation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div>
-      hi
+      <div className='container'>
+        <WeatherBox />
+        <WeatherButton />
+      </div>
     </div>
   );
 }
